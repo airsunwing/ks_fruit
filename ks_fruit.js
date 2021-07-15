@@ -80,7 +80,7 @@ async function watering() {
                     //console.log(response.body);
                     if (data.result == 1) {
                         waterCount++;
-                        waterNum = data.data.wateringCan.waterAmount;
+                        if (data.data.wateringCan && data.data.wateringCan.waterAmount) waterNum = data.data.wateringCan.waterAmount;
                         console.log('\n【浇水】:第' + waterCount + '次浇水成功,剩余' + waterNum + '滴水!');
                     }
                     else {
@@ -109,7 +109,7 @@ async function treeInfo(i) {
                 //console.log(response.body);
                 if (data.result == 1) {
                     console.log('\n【果树信息】:' + data.data.treeInfo.progressText + ',当前阶段进度:' + (data.data.treeInfo.percent) * 100 + '%');
-                    if ($.env.isNode) await notify.sendNotify('第' + (i + 1) + '个账号果树信息', data.data.treeInfo.progressText + ',当前阶段进度:' + (data.data.treeInfo.percent) * 100 + '%');
+                    //if ($.env.isNode) await notify.sendNotify('第' + (i + 1) + '个账号果树信息', data.data.treeInfo.progressText + ',当前阶段进度:' + (data.data.treeInfo.percent.toFixed(2)) * 100 + '%');
                 }
                 else console.log('\n【果树信息】:' + data.error_msg);
                 resolve();
@@ -129,7 +129,7 @@ function urlTask(url, body) {
             'Content-Type': 'application/json;charset=utf-8',
             'Cookie': thisck,
             'Accept': 'application/json, text/plain, */*',
-            'User-Agent': 'jdltapp;iPad;3.1.0;14.4;network/wifi;hasUPPay/0;pushNoticeIsOpen/0;lang/zh_CN;model/iPad7,5;addressid/;hasOCPay/0;appBuild/1017;supportBestPay/0;pv/4.14;apprpd/MyJD_Main;ref/MyJdMTAManager;psq/3;ads/;psn/956c074c769cd2eeab2e36fca24ad4c9e469751a|8;jdv/0|;adk/;app_device/IOS;pap/JA2020_3112531|3.1.0|IOS 14.4;Mozilla/5.0 (iPad; CPU OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
+            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E149 ksNebula/9.5.50.1222 AZPREFIX/yz CT/0 Yoda/2.5.4.3 StatusHT/44 ICFO/0 ISLP/0 NetType/WIFI BHT/102 WebViewType/WK TitleHT/44',
             'Accept-Language': 'zh-cn'
         },
         body: body
